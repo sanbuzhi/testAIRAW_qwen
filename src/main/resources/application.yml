@@ -1,0 +1,64 @@
+```yaml
+# 应用程序配置
+server:
+  port: 8080  # 应用程序端口
+  servlet:
+    context-path: /beauty-management  # 应用程序上下文路径
+
+# Spring 配置
+spring:
+  application:
+    name: beauty-management  # 应用程序名称
+  datasource:
+    url: jdbc:mysql://localhost:3306/beauty_management?useSSL=false&serverTimezone=UTC  # 数据库连接URL
+    username: root  # 数据库用户名
+    password: your_password  # 数据库密码
+    driver-class-name: com.mysql.cj.jdbc.Driver  # 数据库驱动类
+  jpa:
+    hibernate:
+      ddl-auto: update  # 自动更新数据库表结构
+    show-sql: true  # 是否在控制台显示SQL语句
+    properties:
+      hibernate:
+        format_sql: true  # 格式化SQL语句
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher  # 使用Ant路径匹配策略
+  resources:
+    static-locations: classpath:/static/  # 静态资源位置
+
+# 日志配置
+logging:
+  level:
+    root: INFO  # 根日志级别
+    com.example: DEBUG  # 自定义包的日志级别
+  file:
+    name: logs/beauty-management.log  # 日志文件路径
+
+# 安全配置
+security:
+  jwt:
+    secret: your_secret_key  # JWT密钥
+    expiration: 86400000  # JWT过期时间（毫秒）
+
+# 文件上传配置
+file:
+  upload-dir: /var/uploads/beauty-management  # 文件上传目录
+  max-size: 10MB  # 最大文件大小
+
+# 邮件服务配置
+mail:
+  host: smtp.example.com  # 邮件服务器主机
+  port: 587  # 邮件服务器端口
+  username: your_email@example.com  # 邮件服务器用户名
+  password: your_email_password  # 邮件服务器密码
+  protocol: smtp  # 邮件协议
+  tls: true  # 是否启用TLS
+  from: no-reply@beauty-management.com  # 发件人地址
+
+# 第三方API配置
+third-party:
+  api:
+    key: your_third_party_api_key  # 第三方API密钥
+    base-url: https://api.thirdparty.com  # 第三方API基础URL
+```
