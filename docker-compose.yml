@@ -1,0 +1,62 @@
+```yaml
+version: '3.8'
+
+# 网络配置
+networks:
+  beauty-net:
+    driver: bridge
+
+# 服务定义
+services:
+  # MySQL 数据库服务
+  db:
+    image: mysql:8.0
+    container_name: beauty-db
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=your_root_password
+      - MYSQL_DATABASE=beauty_db
+      - MYSQL_USER=beauty_user
+      - MYSQL_PASSWORD=your_beauty_password
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - beauty-net
+    ports:
+      - "3306:3306"
+
+  # Java 后端服务
+  backend:
+    image: your_backend_image:latest
+    container_name: beauty-backend
+    restart: always
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/beauty_db?useSSL=false&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=beauty_user
+      - SPRING_DATASOURCE_PASSWORD=your_beauty_password
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    depends_on:
+      - db
+    networks:
+      - beauty-net
+    ports:
+      - "8080:8080"
+
+  # Vue 前端服务
+  frontend:
+    image: your_frontend_image:latest
+    container_name: beauty-frontend
+    restart: always
+    environment:
+      - VUE_APP_API_BASE_URL=http://backend:8080
+    depends_on:
+      - backend
+    networks:
+      - beauty-net
+    ports:
+      - "80:80"
+
+# 卷定义
+volumes:
+  db_data:
+```
