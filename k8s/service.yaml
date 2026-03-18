@@ -1,0 +1,37 @@
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: beauty-management-service
+  namespace: production
+  labels:
+    app: beauty-management
+spec:
+  type: ClusterIP
+  selector:
+    app: beauty-management
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  sessionAffinity: None
+  # 如果需要外部访问，可以使用NodePort或LoadBalancer类型
+  # type: NodePort
+  # externalTrafficPolicy: Cluster
+  # 如果使用LoadBalancer，需要配置externalIPs和annotations
+  # externalIPs:
+  # - <your-external-ip>
+  # annotations:
+  #   service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+  #   service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "tcp"
+  #   service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "<your-arn>"
+  #   service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
+  #   service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: "60"
+  # ports:
+  # - port: 80
+  #   targetPort: 8080
+  # - port: 443
+  #   targetPort: 8443
+```
+
+此文件定义了一个Kubernetes服务，用于美妆管理系统。它使用`ClusterIP`类型，这意味着该服务只能在集群内部访问。如果需要从外部访问此服务，可以将`type`更改为`NodePort`或`LoadBalancer`，并根据需要配置其他参数。注释部分提供了如何配置这些选项的示例。
