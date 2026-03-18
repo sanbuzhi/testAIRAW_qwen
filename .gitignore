@@ -1,0 +1,79 @@
+```
+# 忽略操作系统生成的文件
+.DS_Store
+Thumbs.db
+
+# 忽略编译输出目录
+/target/
+/dist/
+
+# 忽略IDE配置文件
+/.idea/
+*.iml
+*.ipr
+*.iws
+
+# 忽略Maven和Gradle缓存
+/.mvn/
+/.gradle/
+/local.properties
+/settings.gradle
+/gradle.properties
+/build/
+
+# 忽略日志文件
+/logs/
+*.log
+
+# 忽略临时文件
+*.tmp
+*.bak
+*.swp
+
+# 忽略敏感信息
+.env
+.env.local
+.env.*.local
+
+# 忽略前端构建工具生成的文件
+/node_modules/
+/yarn.lock
+/package-lock.json
+/npm-debug.log
+/pnpm-debug.log
+/yarn-error.log
+
+# 忽略Docker相关文件
+/docker-compose.override.yml
+.dockerenv
+.Dockerfile
+
+# 忽略数据库文件
+/*.db
+/*.sqlite3
+
+# 忽略测试覆盖率报告
+/coverage/
+/lcov-report/
+
+# 忽略Jupyter Notebook检查点
+.ipynb_checkpoints/
+
+# 忽略Python虚拟环境
+/venv/
+/.venv/
+/venv.bak/
+.pytest_cache/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+*.egg
+*.so
+*.dylib
+*.dll
+
+# 忽略VSCode配置文件
+.vscode/
+*.code-workspace
+```
