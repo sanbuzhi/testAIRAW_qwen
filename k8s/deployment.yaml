@@ -1,0 +1,76 @@
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: beauty-management-system
+  namespace: production
+  labels:
+    app: beauty-management
+spec:
+  replicas: 3  # 设置副本数量，根据实际需求调整
+  selector:
+    matchLabels:
+      app: beauty-management
+  template:
+    metadata:
+      labels:
+        app: beauty-management
+    spec:
+      containers:
+      - name: beauty-management
+        image: your-docker-repo/beauty-management:latest  # 替换为你的Docker镜像地址
+        ports:
+        - containerPort: 8080  # 应用程序监听的端口
+        env:
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: host
+        - name: DB_PORT
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: port
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: password
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: jwt-secret
+              key: secret
+        livenessProbe:  # 检查容器是否存活
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:  # 检查容器是否准备好接收流量
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        resources:  # 资源限制和请求
+          requests:
+            memory: "256Mi"
+            cpu: "500m"
+          limits:
+            memory: "512Mi"
+            cpu: "1000m"
+      imagePullSecrets:  # 如果使用私有仓库，需要配置拉取密钥
+      - name: regcred
+  strategy:  # 更新策略
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+```
