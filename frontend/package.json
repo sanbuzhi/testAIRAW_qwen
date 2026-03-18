@@ -1,0 +1,24 @@
+```json
+{
+  "name": "beauty-management-system",
+  "version": "1.0.0",
+  "description": "A beauty management system using Vue3 and Element Plus",
+  "author": "Your Name <your.email@example.com>",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^0.27.2", // HTTP client for making API requests
+    "element-plus": "^2.2.16", // UI library based on Vue3
+    "vue": "^3.2.37", // Vue3 framework
+    "vue-router": "^4.0.15" // Routing for Vue3
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.0.1", // Vite plugin for Vue3
+    "vite": "^3.0.4" // Modern build tool
+  }
+}
+```
